@@ -62,14 +62,14 @@ export default function AboutUs() {
           </div>
         </div>
 
-        {/* Transparency details for Ads networks and AdSense */}
+        {/* Transparency details for Ads networks and Adcash */}
         <section className="space-y-3">
           <h3 className="text-base font-semibold text-white flex items-center gap-2">
             <span className="w-1.5 h-4 bg-emerald-500 rounded-sm inline-block" />
             Transparență pentru utilizatori și rețele publicitare
           </h3>
           <p>
-            Această platformă este gratuită, necomercială în sens strict, și nu colectează date cu caracter personal în afara preferințelor de vizualizare voluntare. Suntem devotați respectării reglementărilor Europene expuse în Directiva GDPR și colaborăm activ cu companii publicitare legitime precum Google pentru a oferi reclame controlate, sigure și neinvazive.
+            Această platformă este gratuită, necomercială în sens strict, și nu colectează date cu caracter personal în afara preferințelor de vizualizare voluntare. Suntem devotați respectării reglementărilor Europene expuse în Directiva GDPR și colaborăm activ cu companii publicitare legitime precum <strong>Adcash</strong> pentru a oferi reclame controlate, sigure și neinvazive.
           </p>
           <p>
             Prin accesarea platformei, ne ajuți să menținem acest sistem live gratuit și pentru alți colegi români și bulgari aflați în tranzit. Îți mulțumim pentru sprijin!

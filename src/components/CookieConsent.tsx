@@ -137,7 +137,7 @@ export default function CookieConsent({ forceOpen = false, onCloseForceOpen }: C
                     Respectăm intimitatea dumneavoastră!
                   </h4>
                   <p className="text-xs text-slate-400 leading-relaxed max-w-2xl">
-                    Utilizăm cookie-uri proprii și tehnologii terțe (Google AdSense, Google Analytics, Adcash) pentru a asigura buna operare tehnică a platformei de trecere a vămii Giurgiu-Ruse, a analiza audiența și a afișa mesaje publicitare relevante. Aveți libertatea de a vă alege preferințele de stocare conform GDPR.
+                    Utilizăm cookie-uri proprii și tehnologii terțe (Adcash, Google Analytics) pentru a asigura buna operare tehnică a platformei de trecere a vămii Giurgiu-Ruse, a analiza audiența și a afișa mesaje publicitare relevante. Aveți libertatea de a vă alege preferințele de stocare conform GDPR.
                   </p>
                 </div>
               </div>
@@ -237,7 +237,7 @@ export default function CookieConsent({ forceOpen = false, onCloseForceOpen }: C
                     </button>
                   </div>
                   <p className="text-[11px] text-slate-500 leading-normal">
-                    Afișează reclame prin rețele autorizate (Google AdSense, Adcash). Permite personalizarea anunțurilor conform intereselor.
+                    Afișează reclame prin rețeaua publicitară autorizată Adcash. Permite personalizarea anunțurilor conform intereselor dumneavoastră.
                   </p>
                 </div>
 

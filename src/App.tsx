@@ -30,6 +30,7 @@ import ReportTime from "./components/ReportTime";
 import Statistics from "./components/Statistics";
 import Planner from "./components/Planner";
 import ReportsHistory from "./components/ReportsHistory";
+import AdSlot from "./components/AdSlot";
 
 // Legal & Compliance Imports
 import PrivacyPolicy from "./components/PrivacyPolicy";
@@ -387,6 +388,9 @@ export default function App() {
           </button>
         </div>
 
+        {/* Header Ad Leaderboard - Adcash Exclusive Placement */}
+        <AdSlot id="ads_top_leaderboard" placement="top-leaderboard" />
+
         {/* NAVIGATION TAB BAR SYSTEM */}
         <nav id="navbar-tabs" className="border-b border-slate-800 pb-1 overflow-x-auto scrollbar-none flex gap-1 bg-slate-950/30 p-1 rounded-xl">
           {tabItems.map((tab) => {
@@ -480,6 +484,9 @@ export default function App() {
           </AnimatePresence>
         </main>
 
+        {/* Footer Ad Leaderboard - Adcash Exclusive Placement */}
+        <AdSlot id="ads_bottom_leaderboard" placement="bottom-leaderboard" />
+
         {/* APP FOOTER DETAILS */}
         <footer className="pt-10 border-t border-slate-900 flex flex-col gap-6 text-xs text-slate-500 pb-8">
           
@@ -564,7 +571,7 @@ export default function App() {
             <div className="flex items-center gap-2">
               <span>Aliniat GDPR & ePrivacy</span>
               <span>•</span>
-              <span>Optim pentru Google AdSense</span>
+              <span>Optimizat pentru Adcash</span>
             </div>
           </div>
 

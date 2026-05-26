@@ -90,7 +90,7 @@ export default function CookiesPolicy() {
                 <span className="text-[10px] font-mono text-amber-400 bg-amber-950/50 px-2 py-0.5 rounded font-bold uppercase">OPTIONAL</span>
               </div>
               <p className="text-slate-400 text-xs leading-normal">
-                Utilizate de rețelele publicitare partenere (cum ar fi Google AdSense sau Adcash). Rolul lor este de a aminti browserului dumneavoastră preferințele anterioare pentru a vă afișa reclame relevante și a diminua frecvența vizualizării acelorași imagini. Dezactivarea acestor cookies nu va elimina reclamele, însă acestea vor fi pur generice și irelevante.
+                Utilizate de rețeaua publicitară parteneră Adcash. Rolul lor este de a aminti browserului dumneavoastră preferințele anterioare pentru a vă afișa reclame relevante și a diminua frecvența vizualizării acelorași imagini. Dezactivarea acestor cookies nu va elimina reclamele, însă acestea vor fi pur generice și irelevante.
               </p>
             </div>
           </div>

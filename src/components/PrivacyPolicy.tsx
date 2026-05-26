@@ -74,33 +74,27 @@ export default function PrivacyPolicy() {
           </div>
         </section>
 
-        {/* 3. Google Services */}
+        {/* 3. Third-party integrations (Adcash & Analytics) */}
         <section className="space-y-4">
           <h3 className="text-base font-semibold text-white flex items-center gap-2">
             <span className="w-1.5 h-4 bg-cyan-500 rounded-sm inline-block" />
-            3. Integrarea Serviciilor Google (AdSense & Analytics)
+            3. Integrarea Serviciilor Terțe (Adcash & Google Analytics)
           </h3>
           <p>
-            Pentru a asigura sustenabilitatea financiară și auto-găzduirea tehnică a platformei, utilizăm rețele publicitare terțe precum <strong>Google AdSense</strong>, alături de sisteme de analiză a audienței precum <strong>Google Analytics</strong>.
+            Pentru a asigura sustenabilitatea financiară a platformei și auto-găzduirea tehnică a serverelor live, utilizăm rețele publicitare terțe precum <strong>Adcash</strong>, alături de sisteme de analiză anonimizată a audienței precum <strong>Google Analytics</strong>.
           </p>
 
           <div className="space-y-3 pl-4 border-l border-slate-800 text-sm">
             <div>
-              <h4 className="text-white font-semibold">A. Google AdSense</h4>
+              <h4 className="text-white font-semibold">A. Rețeaua Publicitară Adcash</h4>
               <p className="text-slate-400 mt-1">
-                Google, ca furnizor terț, folosește cookie-uri pentru a difuza anunțuri pe acest site. Utilizarea cookie-ului DART de către Google face posibilă difuzarea de anunțuri către utilizatorii noștri pe baza vizitei lor pe acest site și pe alte site-uri de pe Internet. Puteți alege să nu utilizați cookie-ul DART vizitând politica de confidențialitate a rețelei de publicitate și de conținut Google.
+                Adcash este furnizorul nostru partener exclusiv de publicitate. Acesta folosește identificatori unici de dispozitiv, cookie-uri de marketing și scripturi specifice (inclusiv tehnologii avansate anti-adblock) pentru a vă afișa anunțuri relevante în timpul navigării pe site-ul nostru. Adcash culege dinamic și afișează bannere, notificări sau alte formate publicitare sigure. Nu colectăm și nu controlăm profilele de publicitate create de partenerul nostru.
               </p>
             </div>
             <div>
               <h4 className="text-white font-semibold">B. Google Analytics</h4>
               <p className="text-slate-400 mt-1">
                 Utilizăm Google Analytics pentru a înțelege comportamentul general de utilizare și volumele de trafic. Acest instrument colectează date anonimizate pentru a ne arăta care secțiuni sunt cele mai accesate, fără a crea profiluri individuale de identificare directă a utilizatorului.
-              </p>
-            </div>
-            <div>
-              <h4 className="text-white font-semibold">C. Google Consent Mode v2</h4>
-              <p className="text-slate-400 mt-1">
-                Platforma noastră include integrarea nativă cu <strong>Google Consent Mode v2</strong>. Aceasta transmite semnale de consimțământ direct către Google (parametru <code>ad_storage</code>, <code>analytics_storage</code>, <code>ad_user_data</code>, <code>ad_personalization</code>). Serviciile Google își adaptează dinamic comportamentul în funcție de acceptele exprimate de dvs. în selectorul nostru de cookie-uri.
               </p>
             </div>
           </div>

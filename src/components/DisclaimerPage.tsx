@@ -65,7 +65,7 @@ export default function DisclaimerPage() {
             Monetizare, Afiliere și Reclame Terțe
           </h3>
           <p className="text-slate-400 text-xs md:text-sm">
-            Pentru a finanța cheltuielile lunare de infrastructură Cloud Run, hosting, stocare Firestore și certificate SSL necesare rulării platformei live în regim permanent, afișăm reclame prin <strong>Google AdSense</strong> și script-ul Anti-Adblock de la <strong>Adcash</strong>. 
+            Pentru a finanța cheltuielile lunare de infrastructură Cloud Run, hosting, stocare Firestore și certificate SSL necesare rulării platformei live în regim permanent, afișăm reclame integrate exclusiv prin rețeaua publicitară <strong>Adcash</strong> (inclusiv prin tehnologii inteligente de ocolire a blocatoarelor de reclame / script-ul Anti-Adblock). 
           </p>
           <p className="text-slate-400 text-xs md:text-sm">
             Prezența unor reclame pe platformă nu reprezintă o recomandare sau o susținere directă a produselor sau serviciilor promoted de către sistemul terț de publicitate. Vizitatorii sunt singurii responsabili pentru interacțiunea lor cu bannerele publicitare.

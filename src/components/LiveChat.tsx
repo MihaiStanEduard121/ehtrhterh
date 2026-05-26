@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Send, Users, User, ShieldCheck, HelpCircle, Edit3, Check } from "lucide-react";
 import { ChatMessage, Direction } from "../types";
+import AdSlot from "./AdSlot";
 
 interface LiveChatProps {
   direction: Direction;
@@ -232,6 +233,9 @@ export default function LiveChat({ direction, onlineCount }: LiveChatProps) {
             Bine ai venit în camera live pentru sensul de mers selectat. Schimbă direcția din header pentru a comuta între discuțiile de pe sensul România→Bulgaria și Bulgaria→România.
           </p>
         </div>
+
+        {/* Dynamic Ad Placement slot */}
+        <AdSlot id="ads_chat_infeed" placement="infeed" className="bg-slate-950/70 opacity-90 border-slate-850" />
 
         {/* Message Bubble Mapping */}
         {messages.map((msg) => {

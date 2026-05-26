@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { Clock, AlertTriangle, CheckCircle, Flame, Truck, Car, Navigation2, ShieldCheck } from "lucide-react";
 import { EtaInfo, TrafficStatus } from "../types";
+import AdSlot from "./AdSlot";
 
 interface CheckTimeProps {
   direction: "RO_BG" | "BG_RO";
@@ -185,6 +186,9 @@ export default function CheckTime({ direction, eta, onlineCount }: CheckTimeProp
           </div>
         </div>
       </div>
+
+      {/* Adcash Dynamic Native Placeholder Slot */}
+      <AdSlot id="ads_check_infeed" placement="infeed" />
 
       {/* Main Wait Timers Row */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
