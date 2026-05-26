@@ -310,6 +310,69 @@ const broadcast = (data: any) => {
 // Middleware
 app.use(express.json());
 
+// Adcash Anti-Adblock Integration & Update Engine (runs cloud-native background fetch every 5 minutes)
+let cachedAdcashScript = `
+// Adcash Anti-Adblock Fallback Initializer
+(function() {
+    console.log("Adcash Anti-Adblock library loading...");
+})();
+`;
+let lastAdcashFetchTime = 0;
+
+const getAdcashScript = async (): Promise<string> => {
+  const now = Date.now();
+  // Fetch every 5 minutes (300,000 ms) as recommended
+  if (!lastAdcashFetchTime || now - lastAdcashFetchTime > 300000) {
+    try {
+      console.log("Adcash Engine: Fetching updated Anti-Adblock Script...");
+      const response = await fetch("https://adbpage.com/adblock?v=3&format=js&lnxv=2", {
+        headers: {
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        }
+      });
+      if (response.ok) {
+        const scriptText = await response.text();
+        if (scriptText && scriptText.trim().length > 30) {
+          cachedAdcashScript = scriptText;
+          lastAdcashFetchTime = now;
+          console.log("Adcash Engine: Successfully fetched and cached latest script.");
+          
+          // Also persist statically to public and dist folders
+          const publicDir = path.join(process.cwd(), "public");
+          if (!fs.existsSync(publicDir)) {
+            fs.mkdirSync(publicDir, { recursive: true });
+          }
+          fs.writeFileSync(path.join(publicDir, "t48s7z.js"), scriptText, "utf-8");
+          
+          const distDir = path.join(process.cwd(), "dist");
+          if (fs.existsSync(distDir)) {
+            fs.writeFileSync(path.join(distDir, "t48s7z.js"), scriptText, "utf-8");
+          }
+        }
+      } else {
+        console.warn(`Adcash Engine: Fetch returned status ${response.status}. Using cached library.`);
+      }
+    } catch (err) {
+      console.error("Adcash Engine: Error updating script:", err);
+    }
+  }
+  return cachedAdcashScript;
+};
+
+// Pre-fetch Adcash script on startup
+getAdcashScript().catch(err => console.error("Adcash Startup Fetch Error:", err));
+
+// Serve the obscure filename dynamic library
+app.get("/t48s7z.js", async (req, res) => {
+  try {
+    const script = await getAdcashScript();
+    res.setHeader("Content-Type", "application/javascript");
+    res.send(script);
+  } catch (err) {
+    res.status(500).send("// Error loading script");
+  }
+});
+
 // API Routes
 // 1. Verification and full current state
 app.get("/api/status", (req, res) => {
@@ -608,6 +671,128 @@ app.get("/api/chat-history", (req, res) => {
     .sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime())
     .slice(-100); // return up to 100 historical for layout
   res.json(messages);
+});
+
+// Post handler for contact form
+app.post("/api/contact", async (req, res) => {
+  const { name, email, subject, message } = req.body;
+  if (!name || !email || !message) {
+    return res.status(400).json({ error: "Missing required fields" });
+  }
+
+  const cleanName = String(name).trim().substring(0, 80);
+  const cleanEmail = String(email).trim().substring(0, 100);
+  const cleanSubject = String(subject || "ads").trim().substring(0, 100);
+  const cleanMessage = String(message).trim().substring(0, 3000);
+
+  const contactMessage = {
+    id: `contact_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+    name: cleanName,
+    email: cleanEmail,
+    subject: cleanSubject,
+    message: cleanMessage,
+    timestamp: new Date().toISOString()
+  };
+
+  console.log(`[Contact] Message from ${cleanName} (${cleanEmail}) regarding subject: ${cleanSubject}`);
+
+  if (firestoreDb) {
+    try {
+      await addDoc(collection(firestoreDb, "contacts"), contactMessage);
+      console.log("Contact registered in cloud firestore database.");
+    } catch (err: any) {
+      console.error("Firestore log contact failed:", err?.message);
+    }
+  }
+
+  res.json({ success: true, message: "Mesaj înregistrat cu succes" });
+});
+
+// Expose professional robots.txt
+app.get("/robots.txt", (req, res) => {
+  res.setHeader("Content-Type", "text/plain");
+  res.send(`User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: https://${req.get("host") || "ais-pre-bohetyrvecxowgq22fbie7-149659630321.europe-west1.run.app"}/sitemap.xml`);
+});
+
+// Expose dynamic sitemap.xml
+app.get("/sitemap.xml", (req, res) => {
+  const host = req.get("host") || "ais-pre-bohetyrvecxowgq22fbie7-149659630321.europe-west1.run.app";
+  const protocol = req.secure ? "https" : "http";
+  const baseUrl = `${protocol}://${host}`;
+  const nowStr = new Date().toISOString().split("T")[0];
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${baseUrl}/</loc>
+    <lastmod>${nowStr}</lastmod>
+    <changefreq>always</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/?tab=chat</loc>
+    <lastmod>${nowStr}</lastmod>
+    <changefreq>always</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/?tab=check</loc>
+    <lastmod>${nowStr}</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/?tab=stats</loc>
+    <lastmod>${nowStr}</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/?tab=planner</loc>
+    <lastmod>${nowStr}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/?tab=about</loc>
+    <lastmod>${nowStr}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/?tab=contact</loc>
+    <lastmod>${nowStr}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/?tab=privacy</loc>
+    <lastmod>${nowStr}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/?tab=cookies</loc>
+    <lastmod>${nowStr}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/?tab=terms</loc>
+    <lastmod>${nowStr}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/?tab=disclaimer</loc>
+    <lastmod>${nowStr}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+</urlset>`;
+
+  res.setHeader("Content-Type", "application/xml");
+  res.send(xml);
 });
 
 // Vite Integration inside Node runtime

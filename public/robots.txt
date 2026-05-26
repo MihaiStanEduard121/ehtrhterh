@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://ais-pre-bohetyrvecxowgq22fbie7-149659630321.europe-west1.run.app/sitemap.xml

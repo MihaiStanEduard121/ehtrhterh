@@ -13,7 +13,14 @@ import {
   History,
   CheckCircle,
   HelpCircle,
-  ArrowRightLeft
+  ArrowRightLeft,
+  Shield,
+  Cookie,
+  Scale,
+  AlertTriangle,
+  Info,
+  Mail,
+  ArrowLeft
 } from "lucide-react";
 
 import { BorderReport, ChatMessage, Direction, EtaInfo, LiveStats } from "./types";
@@ -23,6 +30,15 @@ import ReportTime from "./components/ReportTime";
 import Statistics from "./components/Statistics";
 import Planner from "./components/Planner";
 import ReportsHistory from "./components/ReportsHistory";
+
+// Legal & Compliance Imports
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import CookiesPolicy from "./components/CookiesPolicy";
+import TermsAndConditions from "./components/TermsAndConditions";
+import DisclaimerPage from "./components/DisclaimerPage";
+import AboutUs from "./components/AboutUs";
+import ContactPage from "./components/ContactPage";
+import CookieConsent from "./components/CookieConsent";
 
 interface LiveToast {
   id: string;
@@ -34,6 +50,7 @@ interface LiveToast {
 export default function App() {
   const [direction, setDirection] = useState<Direction>("RO_BG");
   const [activeTab, setActiveTab] = useState<string>("chat"); // Default active is Chat Live as requested
+  const [cookieConsentForceOpen, setCookieConsentForceOpen] = useState(false);
   
   // Realtime engine statistics state
   const [onlineCount, setOnlineCount] = useState<number>(100);
@@ -337,6 +354,26 @@ export default function App() {
         </nav>
 
         {/* CONTAINER FOR TAB VIEW SCREEN */}
+        {["privacy", "cookies", "terms", "disclaimer", "about", "contact"].includes(activeTab) && (
+          <div className="mb-4 flex items-center justify-between bg-slate-950/40 border border-slate-850 p-3.5 rounded-xl">
+            <div className="flex items-center gap-2">
+              <span className="relative flex h-2 w-2 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+              </span>
+              <span className="text-xs text-slate-400 font-mono">Ești pe o pagină legală / asistență.</span>
+            </div>
+            <button
+              onClick={() => setActiveTab("chat")}
+              className="text-xs font-bold text-cyan-400 hover:text-cyan-300 flex items-center gap-1.5 cursor-pointer bg-cyan-950/40 px-3 py-1.5 rounded-lg border border-cyan-900/35 transition-all"
+            >
+              <ArrowLeft size={13} />
+              <span>Înapoi la monitorizare live</span>
+            </button>
+          </div>
+        )}
+
+        {/* CONTAINER FOR TAB VIEW SCREEN */}
         <main className="min-h-[460px] relative">
           <AnimatePresence mode="wait">
             <motion.div
@@ -364,22 +401,123 @@ export default function App() {
               {activeTab === "history" && (
                 <ReportsHistory reports={recentReports} direction={direction} />
               )}
+              {activeTab === "privacy" && (
+                <PrivacyPolicy />
+              )}
+              {activeTab === "cookies" && (
+                <CookiesPolicy />
+              )}
+              {activeTab === "terms" && (
+                <TermsAndConditions />
+              )}
+              {activeTab === "disclaimer" && (
+                <DisclaimerPage />
+              )}
+              {activeTab === "about" && (
+                <AboutUs />
+              )}
+              {activeTab === "contact" && (
+                <ContactPage />
+              )}
             </motion.div>
           </AnimatePresence>
         </main>
 
         {/* APP FOOTER DETAILS */}
-        <footer className="pt-8 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] text-slate-500 font-mono">
-          <span>© 2026 Timp Așteptare Giurgiu – Ruse. Toate drepturile comunității rezervate.</span>
-          <div className="flex items-center gap-4">
-            <a href="#rules" className="hover:text-slate-300">Termeni & Condiții</a>
-            <span className="text-slate-800">•</span>
-            <span className="text-emerald-500 font-bold flex items-center gap-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 inline-block animate-ping" />
-              SISTEM LIVE CROWD
-            </span>
+        <footer className="pt-10 border-t border-slate-900 flex flex-col gap-6 text-xs text-slate-500 pb-8">
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+            
+            {/* Mission / Logo */}
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-cyan-400" />
+                <span className="text-xs font-bold text-white uppercase tracking-wider font-mono">Timp Așteptare Giurgiu - Ruse</span>
+              </div>
+              <p className="text-[11px] text-slate-400 leading-relaxed">
+                Monitorizare în timp real bazată pe rapoarte din rândul șoferilor de camioane și autoturisme. O platformă independentă de asistență rutieră la trecerea frontierei.
+              </p>
+            </div>
+
+            {/* Compliance Links */}
+            <div className="space-y-2">
+              <span className="text-[10px] font-bold text-white uppercase tracking-widest font-mono block">Pagini Legale</span>
+              <div className="grid grid-cols-2 gap-2 text-[11px]">
+                <button 
+                  onClick={() => setActiveTab("privacy")} 
+                  className={`hover:text-cyan-400 cursor-pointer text-left ${activeTab === "privacy" ? "text-cyan-400 font-bold" : "text-slate-400"}`}
+                >
+                  Politică Confidențialitate
+                </button>
+                <button 
+                  onClick={() => setActiveTab("cookies")} 
+                  className={`hover:text-cyan-400 cursor-pointer text-left ${activeTab === "cookies" ? "text-cyan-400 font-bold" : "text-slate-400"}`}
+                >
+                  Politică Cookies
+                </button>
+                <button 
+                  onClick={() => setActiveTab("terms")} 
+                  className={`hover:text-cyan-400 cursor-pointer text-left ${activeTab === "terms" ? "text-cyan-400 font-bold" : "text-slate-400"}`}
+                >
+                  Termeni și Condiții
+                </button>
+                <button 
+                  onClick={() => setActiveTab("disclaimer")} 
+                  className={`hover:text-cyan-400 cursor-pointer text-left ${activeTab === "disclaimer" ? "text-cyan-400 font-bold" : "text-slate-400"}`}
+                >
+                  Disclaimer / Declarație
+                </button>
+              </div>
+            </div>
+
+            {/* Support Links */}
+            <div className="space-y-2">
+              <span className="text-[10px] font-bold text-white uppercase tracking-widest font-mono block font-mono">Comunitate & Ads</span>
+              <div className="grid grid-cols-2 gap-2 text-[11px]">
+                <button 
+                  onClick={() => setActiveTab("about")} 
+                  className={`hover:text-cyan-400 cursor-pointer text-left ${activeTab === "about" ? "text-cyan-400 font-bold" : "text-slate-400"}`}
+                >
+                  Despre Noi
+                </button>
+                <button 
+                  onClick={() => setActiveTab("contact")} 
+                  className={`hover:text-cyan-400 cursor-pointer text-left ${activeTab === "contact" ? "text-cyan-400 font-bold" : "text-slate-400"}`}
+                >
+                  Contact Form
+                </button>
+                <button 
+                  onClick={() => setCookieConsentForceOpen(true)}
+                  className="text-amber-400 hover:text-amber-300 font-semibold cursor-pointer text-left flex items-center gap-1"
+                >
+                  <Cookie size={11} className="animate-pulse" />
+                  <span>Preferințe Cookies</span>
+                </button>
+                <span className="text-emerald-500 font-bold flex items-center gap-1.5 font-mono">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 inline-block animate-ping" />
+                  LIVE SYSTEM
+                </span>
+              </div>
+            </div>
+
           </div>
+
+          <div className="border-t border-slate-900 pt-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] text-slate-500 font-mono">
+            <span>© 2026 Giurgiu-Ruse Live Traffic reports. Toate drepturile rezervate.</span>
+            <div className="flex items-center gap-2">
+              <span>Aliniat GDPR & ePrivacy</span>
+              <span>•</span>
+              <span>Optim pentru Google AdSense</span>
+            </div>
+          </div>
+
         </footer>
+
+        {/* Global Cookie Consent System Floating overlay */}
+        <CookieConsent 
+          forceOpen={cookieConsentForceOpen} 
+          onCloseForceOpen={() => setCookieConsentForceOpen(false)} 
+        />
 
       </div>
     </div>
