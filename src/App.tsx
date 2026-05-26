@@ -47,10 +47,67 @@ interface LiveToast {
   author?: string;
 }
 
+const tabTitles: Record<string, string> = {
+  chat: "Chat Live Șoferi & Trafic",
+  check: "Verifică Timpul de Așteptare",
+  report: "Raportează un Timp Nou de Așteptare",
+  stats: "Statistici Timpi de Așteptare",
+  planner: "Planificator Călătorie & Ore Recomandate",
+  history: "Istoric Rapoarte Transmise de Șoferi",
+  privacy: "Politică de Confidențialitate (GDPR)",
+  cookies: "Politică de Utilizare Cookie-uri (ePrivacy)",
+  terms: "Termeni și Condiții de Utilizare",
+  disclaimer: "Disclaimer Legal & Exonerare Răspundere",
+  about: "Despre Proiect & Transparență",
+  contact: "Asistență, Sugestii & Contact Publicitate"
+};
+
 export default function App() {
   const [direction, setDirection] = useState<Direction>("RO_BG");
   const [activeTab, setActiveTab] = useState<string>("chat"); // Default active is Chat Live as requested
   const [cookieConsentForceOpen, setCookieConsentForceOpen] = useState(false);
+
+  // Synchronize document.title and URL parameters elegantly
+  useEffect(() => {
+    const subTitle = tabTitles[activeTab] || "Vamă Live & Chat Comunitate";
+    document.title = `${subTitle} | Timp Așteptare Giurgiu – Ruse`;
+
+    try {
+      const url = new URL(window.location.href);
+      const currentTab = url.searchParams.get("tab");
+      if (currentTab !== activeTab) {
+        url.searchParams.set("tab", activeTab);
+        window.history.pushState({ tab: activeTab }, "", url.toString() + window.location.hash);
+      }
+    } catch (e) {
+      console.warn("Could not pushState:", e);
+    }
+  }, [activeTab]);
+
+  // Initial back button listener and URL parser sync
+  useEffect(() => {
+    try {
+      const url = new URL(window.location.href);
+      const tabParam = url.searchParams.get("tab");
+      const validTabs = ["chat", "check", "report", "stats", "planner", "history", "privacy", "cookies", "terms", "disclaimer", "about", "contact"];
+      if (tabParam && validTabs.includes(tabParam)) {
+        setActiveTab(tabParam);
+      }
+
+      const handlePopState = () => {
+        const freshUrl = new URL(window.location.href);
+        const freshTab = freshUrl.searchParams.get("tab");
+        if (freshTab && validTabs.includes(freshTab)) {
+          setActiveTab(freshTab);
+        }
+      };
+
+      window.addEventListener("popstate", handlePopState);
+      return () => window.removeEventListener("popstate", handlePopState);
+    } catch (e) {
+      console.error("Error setting up PopState listen:", e);
+    }
+  }, []);
   
   // Realtime engine statistics state
   const [onlineCount, setOnlineCount] = useState<number>(100);
