@@ -1,0 +1,6 @@
+{
+  "name": "Timp Așteptare Giurgiu – Ruse",
+  "description": "O platformă live pentru monitorizarea timpului de așteptare la granița România – Bulgaria.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

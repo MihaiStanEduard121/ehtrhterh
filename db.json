@@ -1,0 +1,84 @@
+{
+  "reports": [
+    {
+      "id": "report_1779654903124_vi1ui",
+      "minutes": 35,
+      "vehicleType": "car",
+      "direction": "RO_BG",
+      "timestamp": "2026-05-24T20:35:03.124Z",
+      "userId": "usr_nwwcw96k6"
+    }
+  ],
+  "chat": [
+    {
+      "id": "chat_seed_0",
+      "username": "Driver_Andrei",
+      "text": "Salutare! Cum e pe pod spre Ruse acum?",
+      "direction": "RO_BG",
+      "timestamp": "2026-05-24T15:29:48.298Z"
+    },
+    {
+      "id": "chat_seed_1",
+      "username": "Stefan_RO",
+      "text": "Destul de liber la autoturisme, am stat cam 10 minute la gheretă.",
+      "direction": "RO_BG",
+      "timestamp": "2026-05-24T15:47:48.298Z"
+    },
+    {
+      "id": "chat_seed_2",
+      "username": "Tiristul_Vasi",
+      "text": "La camioane e jale... coada e dincolo de benzinăria Rompetrol.",
+      "direction": "RO_BG",
+      "timestamp": "2026-05-24T16:11:48.298Z"
+    },
+    {
+      "id": "chat_seed_3",
+      "username": "Adrian_P",
+      "text": "Am trecut spre România acum o oră. Foarte repede, maxim 15 min la plata taxei.",
+      "direction": "BG_RO",
+      "timestamp": "2026-05-24T17:29:48.298Z"
+    },
+    {
+      "id": "chat_seed_4",
+      "username": "Bulgaru_Transit",
+      "text": "Se circulă fluent pe pod, nu mai sunt blocaje pe o singură bandă.",
+      "direction": "RO_BG",
+      "timestamp": "2026-05-24T17:53:48.298Z"
+    },
+    {
+      "id": "chat_seed_5",
+      "username": "Trucker_Radu",
+      "text": "Pe sensul Ruse-Giurgiu sunt cam 3 km la camioane. Merge extrem de încet.",
+      "direction": "BG_RO",
+      "timestamp": "2026-05-24T18:29:48.298Z"
+    },
+    {
+      "id": "chat_seed_6",
+      "username": "Dan_Constanta",
+      "text": "Confirm, pe RO->BG e lejer acum la turisme, 15 minute tot procesul de control.",
+      "direction": "RO_BG",
+      "timestamp": "2026-05-24T19:05:48.298Z"
+    },
+    {
+      "id": "chat_seed_7",
+      "username": "Elena_M",
+      "text": "Plata taxei de pod pe partea bulgară merge greu. Pregătiți mărunt sau cardul.",
+      "direction": "BG_RO",
+      "timestamp": "2026-05-24T19:29:48.298Z"
+    },
+    {
+      "id": "chat_seed_8",
+      "username": "Tir_Aghil",
+      "text": "Cântarul de la bulgari merge greu azi... Stați pe bandă.",
+      "direction": "BG_RO",
+      "timestamp": "2026-05-24T19:47:48.298Z"
+    },
+    {
+      "id": "chat_seed_9",
+      "username": "Driver_102",
+      "text": "Sensul Giurgiu -> Ruse e fluid, tocmai am trecut pe pod. Drumuri bune!",
+      "direction": "RO_BG",
+      "timestamp": "2026-05-24T19:53:48.298Z"
+    }
+  ]
+}

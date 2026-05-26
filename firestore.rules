@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default-deny safety net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    match /reports/{reportId} {
+      allow read: if true;
+      allow create: if request.resource.data.minutes is number 
+                    && request.resource.data.minutes >= 1 
+                    && request.resource.data.minutes <= 600
+                    && request.resource.data.vehicleType in ['car', 'truck']
+                    && request.resource.data.direction in ['RO_BG', 'BG_RO'];
+      allow update, delete: if false;
+    }
+
+    match /chat/{chatId} {
+      allow read: if true;
+      allow create: if request.resource.data.username is string 
+                    && request.resource.data.username.size() <= 40
+                    && request.resource.data.text is string 
+                    && request.resource.data.text.size() <= 160
+                    && request.resource.data.direction in ['RO_BG', 'BG_RO'];
+      allow update, delete: if false;
+    }
+  }
+}

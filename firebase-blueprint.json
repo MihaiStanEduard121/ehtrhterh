@@ -1,0 +1,41 @@
+{
+  "entities": {
+    "BorderReport": {
+      "title": "BorderReport",
+      "description": "User reported waiting hours for crossing the border",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "minutes": { "type": "integer" },
+        "vehicleType": { "type": "string", "enum": ["car", "truck"] },
+        "direction": { "type": "string", "enum": ["RO_BG", "BG_RO"] },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "userId": { "type": "string" }
+      },
+      "required": ["id", "minutes", "vehicleType", "direction", "timestamp", "userId"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Live chat message shared between traveling drivers",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "username": { "type": "string" },
+        "text": { "type": "string" },
+        "direction": { "type": "string", "enum": ["RO_BG", "BG_RO"] },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "username", "text", "direction", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/reports": {
+      "schema": "BorderReport",
+      "description": "Collection of wait times reported by travelers"
+    },
+    "/chat": {
+      "schema": "ChatMessage",
+      "description": "Live chat notes and messages"
+    }
+  }
+}
